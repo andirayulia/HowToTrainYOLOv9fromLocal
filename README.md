@@ -36,13 +36,12 @@ Folder train/ berisi gambar dan label yang digunakan untuk training, sedangkan f
 #Buat juga **data.yaml** yang mendefinisikan lokasi gambar untuk training, validation, dan testing, serta jumlah kelas dan nama kelas yang ingin di deteksi
 
 ```python
-train: ../train/images
-val: ../val/images
-test: ../test/images
+train: /content/dataset/train/images
+val: /content/dataset/valid/images
+test: /content/dataset/test/images
 
 nc: 5
 names: ['helmet', 'no-helmet', 'no-vest', 'person', 'vest']
-
 ```
 
 #Pada folder **labels** setiap gambar akan memiliki file **label.txt** yang berisi informasi bounding box yang telah dinormalisasi untuk semua objek di gambar tersebut, dengan format seperti ini 
@@ -65,14 +64,52 @@ from google.colab import files
 uploaded = files.upload()
 ```
 
-**Train**
+**Train Custom Model**
 ```python
 %cd {HOME}/yolov9
 
 !python train.py \
 --batch 16 --epochs 25 --img 640 --device 0 --min-items 0 --close-mosaic 15 \
---data {dataset.location}/data.yaml \
+--data {HOME}/dataset/data.yaml \
 --weights {HOME}/weights/gelan-c.pt \
 --cfg models/detect/gelan-c.yaml \
 --hyp hyp.scratch-high.yaml
 ```
+![image](https://github.com/user-attachments/assets/7fc7bc78-a3fa-41c7-8620-1bbb6fd4a5e7)
+![image](https://github.com/user-attachments/assets/8a29383a-d363-4bde-bd24-7677d99fd8c7)
+![image](https://github.com/user-attachments/assets/1af1959b-dbcd-4717-bd5a-1aec49e0e781)
+![image](https://github.com/user-attachments/assets/41141e98-913c-49de-9af9-a9b25f16bc76)
+
+**Validate Custom Model**
+
+```python
+%cd {HOME}/yolov9
+
+!python train.py \
+--batch 16 --epochs 25 --img 640 --device 0 --min-items 0 --close-mosaic 15 \
+--data {HOME}/dataset/data.yaml \
+--weights {HOME}/weights/gelan-c.pt \
+--cfg models/detect/gelan-c.yaml \
+--hyp hyp.scratch-high.yaml
+```
+![image](https://github.com/user-attachments/assets/91a9e47f-e8c1-467d-930d-dfe466730ed1)
+
+**Inference with Custom Model**
+
+```python
+!python detect.py \
+--img 1280 --conf 0.1 --device 0 \
+--weights {HOME}/yolov9/runs/train/exp2/weights/best.pt \
+--source {HOME}/dataset/test/images
+```
+```python
+import glob
+
+from IPython.display import Image, display
+
+for image_path in glob.glob(f'{HOME}/yolov9/runs/detect/exp/*.jpg')[:2]:
+      display(Image(filename=image_path, width=600))
+```
+![image](https://github.com/user-attachments/assets/4946fa10-9063-401a-b8e4-52fa64e6fa32)
+![image](https://github.com/user-attachments/assets/b94f4063-26e0-481e-9df8-11425c5ada60)
+
