@@ -28,6 +28,21 @@ Melakukan kloning untuk mendapatkan seluruh repository yolov9 dan installasi req
 **PREPARE FOLDER DATASET**
 
 Sebelumnya buat terlebih dahulu folder datset dengan struktur seperti ini <br>
+```python
+dataset/
+|-- train/
+| |-- images/
+| |-- labels/
+|-- val/
+| |-- images/
+| |-- labels/
+|-- test/
+| |-- images/
+| |-- labels/
+|-- data.yaml
+```
+
+
 ![image](https://github.com/user-attachments/assets/c23f8314-632f-4792-8352-2e0dbdc17e93) <br>
 Folder train/ berisi gambar dan label yang digunakan untuk training, sedangkan folder val/ berisi gambar dan label untuk validation, dan test digunakan untuk testing. 
 
