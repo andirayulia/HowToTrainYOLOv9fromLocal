@@ -59,7 +59,7 @@ nc: 5
 names: ['helmet', 'no-helmet', 'no-vest', 'person', 'vest']
 ```
 
-#Pada folder **labels** setiap gambar akan memiliki file **label.txt** yang berisi informasi bounding box yang telah dinormalisasi untuk semua objek di gambar tersebut, dengan format seperti ini 
+#Pada folder **labels** setiap gambar akan memiliki file **label.txt** yang berisi informasi bounding box yang telah dinormalisasi untuk semua objek di gambar tersebut supaya semua ukuran bounding boxnya selaras, general dan flexibel , dengan format seperti ini 
 ```python
 <class_id> <x_center> <y_center> <width> <height>
 ```
@@ -128,3 +128,29 @@ for image_path in glob.glob(f'{HOME}/yolov9/runs/detect/exp/*.jpg')[:2]:
 ![image](https://github.com/user-attachments/assets/4946fa10-9063-401a-b8e4-52fa64e6fa32)
 ![image](https://github.com/user-attachments/assets/b94f4063-26e0-481e-9df8-11425c5ada60)
 
+
+
+
+**Labeling Dataset for Object Detector**
+
+Labeling dapat dilakukan menggunakan LabelImg, untuk class yang digunakan dapat dicustom atau diubah-ubah pada predefined_classes.txt sehingga urutan nomor class nya akan sesuai dengan data.yaml
+
+![image](https://github.com/user-attachments/assets/0136cd2e-a10e-4713-be43-1d9665b14c4f)
+
+
+![Screenshot 2024-09-08 233221](https://github.com/user-attachments/assets/cb8b1163-8ad2-48ee-b095-e936dc054725)
+![Screenshot 2024-09-08 233409](https://github.com/user-attachments/assets/73513985-3661-49d5-8c20-720140f8e24c)
+![Group 333](https://github.com/user-attachments/assets/bc13c884-6a19-435c-afec-d0fc25fcfe1d)
+
+```python
+xcenter = (xmin + w/2) / w_img
+ycenter = (ymin + h/2) / h_img
+w = w / w_img
+h = h / h_img
+```
+```python
+<class_id> <x_center> <y_center> <width> <height>
+```
+Untuk labeling yang mendapatkan langsung format seperti ini, dapat diatur menggunakan format YOLO
+
+![Screenshot 2024-09-08 233443](https://github.com/user-attachments/assets/010b43b1-2bbb-44e2-a385-9f9862b1946a)
