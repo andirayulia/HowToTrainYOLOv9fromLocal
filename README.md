@@ -63,6 +63,8 @@ names: ['helmet', 'no-helmet', 'no-vest', 'person', 'vest']
 
 **Labeling Dataset for Object Detector**
 
+**TUTORIAL** = https://medium.com/deepquestai/object-detection-training-preparing-your-custom-dataset-6248679f0d1d
+
 Labeling dapat dilakukan menggunakan LabelImg, untuk class yang digunakan dapat dicustom atau diubah-ubah pada predefined_classes.txt sehingga urutan nomor class nya akan sesuai dengan data.yaml
 
 ![image](https://github.com/user-attachments/assets/0136cd2e-a10e-4713-be43-1d9665b14c4f)
